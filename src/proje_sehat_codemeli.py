@@ -56,27 +56,30 @@ setting = st.sidebar.selectbox('diagrees', ('National ID','Delete from history',
 if setting == 'National ID':
     st.title("Welcom to your Website")
     st.write("Let's check the National ID")
-    National_ID = st.text_input('Enter your national ID (10 digits) : ')
-    if National_ID:
-
-        result = get_code(National_ID)
-        if result == 'The code is valid':
-        
-            st.success(result)
-            st.write('would you like to save it?')
-            x = st.button('yes')
-            if x:
-                insert(National_ID, result)
-                st.success('insert the table')
-        elif result == 'The number of digits is incorrect':
-            st.error(result)
-        elif result == 'Invalid code':
-            st.error(result)
-        elif result is None:
-            st.error('network error')
-        elif result == 'page not finde':
-            st.error('request error')
-
+    National_ID_2 = st.text_input('Enter your national ID (10 digits) : ')
+    if National_ID_2:
+        try:
+            National_ID = int(National_ID_2)
+            result = get_code(National_ID)
+            if result == 'The code is valid':
+            
+                st.success(result)
+                st.write('would you like to save it?')
+                x = st.button('yes')
+                if x:
+                    insert(National_ID, result)
+                    st.success('insert the table')
+            elif result == 'The number of digits is incorrect':
+                st.error(result)
+            elif result == 'Invalid code':
+                st.error(result)
+            elif result is None:
+                st.error('network error')
+            elif result == 'page not finde':
+                st.error('request error')
+        except ValueError:
+            st.error('error : please only use number')
+            
 elif setting == 'Delete from history':
     st.title('Delete by ID')
     id = st.number_input("Enter ID:", min_value=1, step=1)
