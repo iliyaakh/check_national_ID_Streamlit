@@ -116,6 +116,7 @@ elif setting == 'search by ID':
             st.info("No records found")
 
 elif setting == 'Make Table':
+    st.title('All records')
     data = read_full()
     if data:
         st.dataframe(data, column_config={"0": "ID", "1": "National ID", "2": "Result"})
